@@ -15,6 +15,9 @@ public class Product {
     private Integer referenceCode;
     private String description;
     private BigDecimal priceUnit;
+    private BigDecimal cost;
 
+    public void UploadProducts(){
 
+    }
 }
