@@ -6,8 +6,40 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.poi.ss.usermodel.*;
+import reader.ExcelReader; // importa correctamente tu clase
+import java.io.IOException;
 
 public class ProductDAO {
+
+    public void importFromExcel(String rutaArchivo) {
+        try (Workbook workbook = ExcelReader.getWorkbook(rutaArchivo)) {
+            Sheet hoja = workbook.getSheetAt(0);
+
+            // Empieza desde la fila 1 si tienes encabezados
+            for (int i = 1; i <= hoja.getLastRowNum(); i++) {
+                Row fila = hoja.getRow(i);
+                if (fila == null) continue;
+
+                try {
+                    int referencia = (int) fila.getCell(0).getNumericCellValue();
+                    String nombre = fila.getCell(1).getStringCellValue();
+                    String descripcion = fila.getCell(2).getStringCellValue();
+                    BigDecimal precio = new BigDecimal(fila.getCell(3).getNumericCellValue());
+                    BigDecimal costo = new BigDecimal(fila.getCell(4).getNumericCellValue());
+
+                    Product producto = new Product(nombre, referencia, descripcion, precio, costo);
+                    this.createProduct(producto);
+                } catch (Exception e) {
+                    System.out.println("Fila " + i + " inválida: " + e.getMessage());
+                }
+            }
+
+            System.out.println("Importación completa.");
+        } catch (IOException e) {
+            System.out.println("No se pudo leer el archivo: " + e.getMessage());
+        }
+    }
 
     public void createTableIfNotExists() {
         String sql = """
@@ -20,9 +52,9 @@ public class ProductDAO {
         )
     """;
 
+
         try (Connection conn = SQLiteConexion.connect();
              Statement stmt = conn.createStatement()) {
-
             stmt.execute(sql);
             System.out.println("Table 'products' ready.");
         } catch (SQLException e) {

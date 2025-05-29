@@ -10,6 +10,7 @@ public class Main {
 
         // Ensure the products table exists
         dao.createTableIfNotExists();
+        dao.importFromExcel("archivo.xlsx");
 
 //        // Optional: Insert a sample product
 //        Product sample = new Product("Sample Product", 1002, "Demo description", new BigDecimal("99.99"), new BigDecimal("59.99"));
