@@ -1,3 +1,5 @@
-C:\Users\janeiro.placido\Desktop\taza\invoDesk\Main.java
-C:\Users\janeiro.placido\Desktop\taza\invoDesk\interfaces\Product.java
-C:\Users\janeiro.placido\Desktop\taza\invoDesk\models\Product.java
+C:\Users\games\Desktop\portfolio\invoDesk\Main.java
+C:\Users\games\Desktop\portfolio\invoDesk\dao\ProductDAO.java
+C:\Users\games\Desktop\portfolio\invoDesk\db\SQLiteConexion.java
+C:\Users\games\Desktop\portfolio\invoDesk\interfaces\Product.java
+C:\Users\games\Desktop\portfolio\invoDesk\models\Product.java
